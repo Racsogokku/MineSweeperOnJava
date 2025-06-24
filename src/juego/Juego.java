@@ -142,7 +142,7 @@ public class Juego {
         }
         mapaVisual.append("\n");
         for (Celda[] fila : mapa) {
-            mapaVisual.append("|");
+            mapaVisual.append(numFila).append(" |");
             for (Celda celda : fila) {
                 if (celda.isDescubierta()) {
                     if (celda.tieneBomba()) {
@@ -154,7 +154,7 @@ public class Juego {
                     mapaVisual.append("■ ");
                 }
             }
-            mapaVisual.append("| ").append(numFila).append("\n");
+            mapaVisual.append("| ").append("\n");
             numFila++;
         }
         System.out.println(mapaVisual);
