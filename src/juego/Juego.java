@@ -54,11 +54,24 @@ public class Juego {
         int filAJugar, colAJugar;
         Random random=new Random();
         int minimoBombas = minNumBombas();
+        int intentos=0;
         // Elegir una celda aleatoria que no tenga bomba para empezar
         do {
             filAJugar = random.nextInt(fils);
             colAJugar= random.nextInt(cols);
-        }while((mapa[filAJugar][colAJugar].tieneBomba()) || (mapa[filAJugar][colAJugar].getNumBombasCerca() > minimoBombas));
+            intentos++;
+        }while(((mapa[filAJugar][colAJugar].tieneBomba()) || (mapa[filAJugar][colAJugar].getNumBombasCerca() > minimoBombas))&&(intentos<100));
+        if(intentos==100){
+            for (int i = 0; i < fils; i++) {
+                for( int j = 0; j < cols; j++) {
+                    if (mapa[i][j].getNumBombasCerca() == minimoBombas && !mapa[i][j].tieneBomba()) {
+                        filAJugar = i;
+                        colAJugar = j;
+
+                    }
+                }
+            }
+        }
         clicarCasilla(filAJugar, colAJugar);
         // Iniciar el juego
         try(Scanner scanner=new Scanner(System.in)) {
