@@ -1,16 +1,20 @@
 import juego.FinJuego;
-
+import juego.Juego;
 import java.util.Scanner;
 
 public class MainJuego {
     public static void main (String[] args) {
         Scanner scanner=new Scanner(System.in);
         System.out.println("Welcome to Minesweeper!");
-        System.out.println("Please enter the number of rows, columns, and bombs (e.g., 4 4 1): ");
-        int rows = scanner.nextInt();
-        int cols = scanner.nextInt();
-        int bombs = scanner.nextInt();
-        juego.Juego juego = new juego.Juego(rows, cols, bombs);
+        Juego juego = null;
+        int fils, cols, numBombas;
+        do {
+            System.out.print("Please enter the number of rows, columns, and bombs (e.g., 4 4 1): ");
+            fils = scanner.nextInt();
+            cols= scanner.nextInt();
+            numBombas = scanner.nextInt();
+        } while (fils <= 0 || cols <= 0 || numBombas <= 0 || numBombas >= fils * cols);
+        juego = new Juego(fils, cols, numBombas);
         try {
             juego.jugar();
         } catch (FinJuego e) {
