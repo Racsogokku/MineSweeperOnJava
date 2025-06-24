@@ -136,7 +136,7 @@ public class Juego {
     private void mostrarMapa () {
         StringBuilder mapaVisual = new StringBuilder();
         int numFila=0;
-        mapaVisual.append(" ");
+        mapaVisual.append("   ");
         for(int i = 0; i < cols; i++) {
             mapaVisual.append(i).append(" ");
         }
