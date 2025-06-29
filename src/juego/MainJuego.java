@@ -1,5 +1,5 @@
-import juego.FinJuego;
-import juego.Juego;
+package juego;
+
 import java.util.Scanner;
 
 public class MainJuego {

@@ -2,6 +2,7 @@ package juego;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Juego {
     private Celda[][] mapa;
@@ -149,27 +150,41 @@ public class Juego {
     private void mostrarMapa () {
         StringBuilder mapaVisual = new StringBuilder();
         int numFila=0;
-        mapaVisual.append("   ");
+        int maxNumNumeros = numNumeros(cols-1);
+        int maxNumNumerosFil = numNumeros(fils-1);
+        mapaVisual.append("  ").append(" ".repeat(2));
         for(int i = 0; i < cols; i++) {
-            mapaVisual.append(i).append(" ");
+            mapaVisual.append(i).append(" ".repeat(maxNumNumeros-numNumeros(i)+2));
         }
         mapaVisual.append("\n");
         for (Celda[] fila : mapa) {
-            mapaVisual.append(numFila).append(" |");
+            mapaVisual.append(numFila).append(" ".repeat(3-numNumeros(numFila)));
+            StringJoiner stringJoiner=new StringJoiner(" ".repeat(maxNumNumeros+1),"|","|");
             for (Celda celda : fila) {
                 if (celda.isDescubierta()) {
                     if (celda.tieneBomba()) {
                         haPerdido = true;
+                        stringJoiner.add("X");
                     } else {
-                        mapaVisual.append(celda.getNumBombasCerca()).append(" ");
+                        stringJoiner.add(Integer.toString(celda.getNumBombasCerca()));
                     }
                 } else {
-                    mapaVisual.append("■ ");
+                    stringJoiner.add("■");
                 }
             }
-            mapaVisual.append("| ").append("\n");
+            mapaVisual.append(stringJoiner.toString()).append("\n");
             numFila++;
         }
         System.out.println(mapaVisual);
+    }
+    private int numNumeros(int num){
+        int contador = 0;
+        if(num!=0) {
+            while (num > 0) {
+                num /= 10;
+                contador++;
+            }
+        }else contador =1;
+        return contador;
     }
 }
